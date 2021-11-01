@@ -35,7 +35,31 @@ public class TestBase {
     private static final String HOW_MONEY_TO_COURIER = "5000";
     private static final String HOW_MANY_USERS = "3";
 
+    @Before
     public void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        capabilities.setCapability("videoName", "MokkanoTestCaseForFirstSendOrder.mp4");
+        capabilities.setCapability("name", "MokkanoTestCaseForFirstSendOrder");
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability("browserVersion", "91.0");
+
+        capabilities.setCapability("moon:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+
+        ));
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(
+                    new URL("http://192.168.1.17:30901/wd/hub"),
+                    capabilities
+            );
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
         WebDriverRunner.setWebDriver(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
