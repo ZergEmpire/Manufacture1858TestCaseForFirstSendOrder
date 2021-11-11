@@ -40,8 +40,8 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("videoName", "MokkanoTestCaseForFirstSendOrder.mp4");
-        capabilities.setCapability("name", "MokkanoTestCaseForFirstSendOrder");
+        capabilities.setCapability("videoName", "Manufacture1858TestCaseForFirstSendOrder.mp4");
+        capabilities.setCapability("name", "Manufacture1858TestCaseForFirstSendOrder");
         capabilities.setCapability("browserName", "chrome");
         capabilities.setCapability("browserVersion", "91.0");
 
@@ -70,6 +70,7 @@ public class TestBase {
     public void end() {
         closeWebDriver();
     }
+
     @Rule
     public TextReport report = new TextReport();
 
@@ -79,7 +80,7 @@ public class TestBase {
     }
 
     @Step("кликаю на переход к главной странице")
-    public void goMainPage (){
+    public void goMainPage() {
         $x("//div[contains(@class, \"h-left\")]/div[@class = \"logo\"]").click();
     }
 
@@ -92,6 +93,7 @@ public class TestBase {
 
     @Step("Добавляю в корзину карточку товара")
     public void pickRandCards() {
+
         List<SelenideElement> clickRandomCards = elements(By.xpath("//li[contains(@class, \"productBox\") and not (contains(@class, \"action-wrapper\")) and not (contains(@class, \"in-stop-list\"))]//a[contains(@class, \"add-cart\")]"));
         int i = (int) (Math.random() * clickRandomCards.size());
         SelenideElement randCard = $(clickRandomCards.get(i));
@@ -121,9 +123,9 @@ public class TestBase {
         options.get(i).click();
     }
 
-    @Step ("Переход к оформлению заказа")
+    @Step("Переход к оформлению заказа")
     public void goNextOrderReg() {
-            $x("//div[contains(@class, \"item-cart-buttons\")]/button[contains(@class, \"bt_link\")]").scrollTo().click();
+        $x("//div[contains(@class, \"item-cart-buttons\")]/button[contains(@class, \"bt_link\")]").scrollTo().click();
     }
 
     @Step("Заполняю поля")
